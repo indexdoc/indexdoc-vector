@@ -2,7 +2,7 @@
   <div style="font-size: 15px; line-height: 2; padding: 4px 0; letter-spacing: 0.5px;">
     <strong style="color: #24292f;">English</strong>
     | <a href="README.md" style="color: #0969da; text-decoration: none;">简体中文</a>
-    | <a href="https://demo.aituple.com/pc/free/index.html?path=batchDoc" target="_blank" style="color: #165DFF; font-weight: 600; text-decoration: none;">✨ onlineDemo</a>
+    <!-- | <a href="https://demo.aituple.com/pc/free/index.html?path=batchDoc" target="_blank" style="color: #165DFF; font-weight: 600; text-decoration: none;">✨ onlineDemo</a> -->
   </div>
 </div>
   <div style="font-size: 14px; color: #57606a; padding: 2px 0; text-align: left;">
