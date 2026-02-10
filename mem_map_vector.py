@@ -6,9 +6,8 @@ from typing import List, Tuple, Dict
 import logging
 import threading
 from pathlib import Path
-import settings
 import time
-MIN_SCORE = settings.MIN_SCORE * 0.5
+MIN_SCORE = 0.3  # 余弦相似度搜索的最低阈值，低于该分数的结果会被过滤
 
 # -----------------------------
 # 轻量级读写锁（公平、可重入）

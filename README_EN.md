@@ -21,20 +21,16 @@ A lightweight, thread-safe memory-mapped vector storage library with efficient c
 [![Python Version](https://img.shields.io/badge/python-3.10+-green.svg)](https://www.python.org/)  [![GitHub Stars](https://img.shields.io/github/stars/indexdoc/indexdoc-vector?style=social)](https://github.com/indexdoc/indexdoc-vector.git)   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## ✨ Core Features
-- **Memory-mapped I/O**: Built on `numpy.memmap`, supports TB-scale vector storage with extremely low memory footprint
-- **Thread-safe**: Built-in fair reentrant read-write lock (RWLock) for high-concurrency read/write operations
-- **Efficient search**: Supports full-library cosine similarity search and ID-range-restricted search, optimized for batch processing
-- **Vector management**: Complete add, delete, compact, and statistics functionality
-- **Zero-dependency core**: Only relies on NumPy, no complex database deployment required
-- **Cross-platform compatibility**: Supports Windows / Linux / macOS, handles Windows file locking issues
-- **Space optimization**: Supports compacting deleted zero vectors to reclaim disk space
+- **Memory-Mapped I/O**: Built on `numpy.memmap`, supports TB-scale vector storage with extremely low memory footprint
+- **Thread Safety**: Built-in fair reentrant read-write lock (RWLock) for high-concurrency read/write operations
+- **Efficient Search**: Full-library cosine similarity search and ID-range-restricted search, optimized for batch processing
+- **Vector Management**: Full-featured add, delete, compact, and statistics functions
+- **Zero-Dependency Core**: Only depends on NumPy, no complex database deployment required
 
 ## 🚀 Quick Start
 
 ### Basic Usage Example
 ```python
-import numpy as np
-
 # Initialize vector storage (default dimension: 512)
 vec_db = MemMapVector("vectors.vec", dimension=512)
 
@@ -57,7 +53,7 @@ print(f"Marked {deleted_count} vectors as deleted")
 
 # Compact storage (remove zero vectors)
 id_mapping = vec_db.compact()
-print(f"Compaction finished, sample ID mapping: {id_mapping[:5]}")
+print(f"Compaction completed, sample old-to-new ID mapping: {id_mapping[:5]}")
 
 # Get statistics
 stats = vec_db.stat()
@@ -74,19 +70,19 @@ Initialize vector storage instance
 
 ### Write Operations
 #### `add_vectors(vectors: np.ndarray) -> List[int]`
-Add batch vectors, return list of assigned vector IDs
+Add batch vectors, returns list of assigned vector IDs
 - `vectors`: 2D float32 array with shape (N, dimension)
 
 #### `add_vector_list(vector_list: List[np.ndarray]) -> List[int]`
 Add list of vectors; internally converts to array and calls `add_vectors`
 
 #### `mark_deleted(vector_ids: List[int]) -> int`
-Mark specified vector IDs as deleted (zero-out vectors), return number of vectors actually marked
+Mark specified vector IDs as deleted (zero-out vectors), returns count of actually marked vectors
 
 #### `compact() -> List[Tuple[int, int]]`
-Compact vector file, remove all zero vectors, return old-to-new ID mapping
+Compact vector file by removing all zero vectors, returns old-to-new ID mapping
 
-### Read Operations
+### Search Operations
 #### `cosine_search(query: np.ndarray, top_k: int = 10, min_score: float = 0.0, batch_size: int = 500_000) -> List[Tuple[int, float]]`
 Full-library cosine similarity search
 - `query`: Query vector (1D float32 array)
@@ -94,6 +90,7 @@ Full-library cosine similarity search
 - `min_score`: Minimum similarity threshold
 - `batch_size`: Batch processing size to control memory usage
 
+### Read Operations
 #### `cosine_search_in_vector_ids(query: np.ndarray, vector_ids: List[int], top_k: int = 10, min_score: float = 0.0, batch_size: int = 500_000) -> List[Tuple[int, float]]`
 Cosine similarity search within specified vector ID range
 
@@ -101,7 +98,7 @@ Cosine similarity search within specified vector ID range
 Get single vector by ID; returns None for invalid ID
 
 #### `get_total_vectors() -> int`
-Get total number of vectors (including deleted marked vectors)
+Get total vector count (including marked‑as‑deleted vectors)
 
 #### `stat() -> Dict`
 Get detailed storage statistics including:
@@ -111,28 +108,29 @@ Get detailed storage statistics including:
 - List of deleted vector IDs, etc.
 
 ## ⚡ Performance Optimizations
-1. **Batch processing**: Search and statistics use batch processing to avoid loading all data at once
+1. **Batch Processing**: Search and statistics use batch processing to avoid loading all data at once
 2. **Sequential I/O**: Delete marking and compaction use sequential writes, greatly improving disk I/O efficiency
-3. **Memory management**: Explicitly close memmap handles to avoid file locking and memory leaks
-4. **Read-write separation**: Read-write lock enables concurrent reads and exclusive writes, maximizing throughput
+3. **Memory Management**: Explicitly closes memmap handles to prevent file locking and memory leaks
+4. **Read-Write Separation**: Read-write lock enables concurrent reads and exclusive writes, maximizing throughput
 
 ## 🎯 Use Cases
 - Small-to-medium scale vector retrieval (millions to tens of millions)
 - Embedded systems or resource-constrained environments
-- Scenarios requiring persistent storage without complex databases
+- Scenarios requiring persistent storage without complex database deployment
 - Lightweight alternative to heavyweight vector databases
 
 ## 🚨 Notes
 1. Vector dimension is fixed at initialization and cannot be modified dynamically
 2. Delete only zeros out vectors; call `compact()` to reclaim disk space
 3. `compact()` changes vector IDs; you must maintain ID mapping
-4. Be mindful of file locking on Windows; ensure proper closure of memmap handles
 
 ## 📊 Performance Reference
 | Vector Count | Search Time | Memory Usage | Disk Usage |
-|-------------|-------------|--------------|------------|
-| 1M          | ~0.5s       | ~100MB       | ~2GB       |
-| 10M         | ~5s         | ~100MB       | ~20GB      |
-| 50M         | ~25s        | ~100MB       | ~100GB     |
+|--------------|-------------|--------------|------------|
+| 1M           | ~0.5s       | ~100MB       | ~2GB       |
+| 10M          | ~5s         | ~100MB       | ~20GB      |
+| 50M          | ~25s        | ~100MB       | ~100GB     |
 
-*Test environment: Intel i7-12700H, 32GB RAM, NVMe SSD, 512-dim vectors*
+*Test environment: Intel i7-12700H, 32GB RAM, NVMe SSD, 512-dimensional vectors*
+
+---

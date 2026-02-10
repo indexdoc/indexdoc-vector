@@ -26,8 +26,7 @@
 - **高效搜索**：支持全库余弦相似度搜索和指定ID范围搜索，批量处理优化
 - **向量管理**：完整的添加、删除、压缩、统计功能
 - **零依赖核心**：仅依赖NumPy，无需复杂的数据库部署
-- **跨平台兼容**：支持Windows/Linux/macOS，处理Windows文件锁定问题
-- **空间优化**：支持压缩删除的零向量，回收磁盘空间
+
 
 ## 🚀 快速开始
 
@@ -56,7 +55,7 @@ print(f"标记 {deleted_count} 个向量为删除")
 
 # 压缩存储（移除零向量）
 id_mapping = vec_db.compact()
-print(f"压缩完成，ID映射关系示例: {id_mapping[:5]}")
+print(f"压缩完成，新旧向量映射关系示例: {id_mapping[:5]}")
 
 # 获取统计信息
 stats = vec_db.stat()
@@ -85,7 +84,7 @@ print("存储统计信息:", stats)
 #### `compact() -> List[Tuple[int, int]]`
 压缩向量文件，移除所有零向量，返回新旧ID映射关系
 
-### 读操作
+### 检索操作
 #### `cosine_search(query: np.ndarray, top_k: int = 10, min_score: float = 0.0, batch_size: int = 500_000) -> List[Tuple[int, float]]`
 全库余弦相似度搜索
 - `query`: 查询向量（一维float32数组）
@@ -93,6 +92,7 @@ print("存储统计信息:", stats)
 - `min_score`: 最小相似度阈值
 - `batch_size`: 批量处理大小，控制内存使用
 
+### 读操作
 #### `cosine_search_in_vector_ids(query: np.ndarray, vector_ids: List[int], top_k: int = 10, min_score: float = 0.0, batch_size: int = 500_000) -> List[Tuple[int, float]]`
 在指定ID范围内进行余弦相似度搜索
 
@@ -125,7 +125,7 @@ print("存储统计信息:", stats)
 1. 向量维度在初始化时确定，无法动态修改
 2. 删除操作只是置零向量，需要调用`compact()`才能回收磁盘空间
 3. `compact()`操作会改变向量ID，需要维护ID映射关系
-4. Windows系统下注意文件锁定问题，确保正确关闭memmap句柄
+
 
 ## 📊 性能参考
 | 向量数量 | 搜索时间 | 内存占用 | 磁盘占用 |
