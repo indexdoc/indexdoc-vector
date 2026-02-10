@@ -109,17 +109,6 @@ print("存储统计信息:", stats)
 3. `compact()`操作会改变向量ID，需要维护ID映射关系
 4. Windows系统下注意文件锁定问题，确保正确关闭memmap句柄
 
-## 📄 许可证
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 贡献指南
-欢迎提交Issue和PR，贡献方向包括：
-- 性能优化
-- 添加更多相似度计算方法（如欧氏距离）
-- 索引优化
-- 测试用例完善
-- 文档改进
-
 ## 📊 性能参考
 | 向量数量 | 搜索时间 | 内存占用 | 磁盘占用 |
 |---------|---------|---------|---------|
