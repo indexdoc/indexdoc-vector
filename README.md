@@ -17,7 +17,7 @@
 
 ---
 # MemMapVector: 轻量级内存映射向量存储库
-轻量级、线程安全的内存映射向量存储库，支持高效的余弦相似度搜索和向量管理。
+轻量级、线程安全的内存映射向量存储库，支持高效的余弦相似度搜索和向量管理。该工具库现已发布至 PyPI（Python Package Index），可通过 pip 包管理工具快速安装并投入使用。
 
 [![Python Version](https://img.shields.io/badge/python-3.10+-green.svg)](https://www.python.org/)  [![GitHub Stars](https://img.shields.io/github/stars/indexdoc/indexdoc-vector?style=social)](https://github.com/indexdoc/indexdoc-vector.git)   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## ✨ 核心特性
@@ -27,11 +27,25 @@
 - **向量管理**：完整的添加、删除、压缩、统计功能
 - **零依赖核心**：仅依赖NumPy，无需复杂的数据库部署
 
+## 🌏 库的使用
+```bash
+#库安装
+pip install -U indexdoc-vector #下载最新版本库
+```
+- 若使用该库 python版本最小应为 Python3.10
+- 包目录结构
+```bash
+indexdoc-vector/          # 项目根目录
+├── indexdoc_vector/      # 核心包目录
+│   ├── __init__.py       # 核心代码
+│   └── mem_map_vector.py
+```
 
 ## 🚀 快速开始
 
 ### 基础使用示例
 ```python
+from indexdoc_vector.mem_map_vector import MemMapVector
 
 # 初始化向量存储（维度默认512）
 vec_db = MemMapVector("vectors.vec", dimension=512)

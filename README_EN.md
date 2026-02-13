@@ -16,21 +16,36 @@
 
 ---
 # MemMapVector: Lightweight Memory-Mapped Vector Storage Library
-A lightweight, thread-safe memory-mapped vector storage library with efficient cosine similarity search and vector management.
+A lightweight, thread-safe memory-mapped vector storage library that supports efficient cosine similarity search and vector management. This library is now published on the Python Package Index (PyPI) and can be quickly installed and used via the pip package manager.
 
 [![Python Version](https://img.shields.io/badge/python-3.10+-green.svg)](https://www.python.org/)  [![GitHub Stars](https://img.shields.io/github/stars/indexdoc/indexdoc-vector?style=social)](https://github.com/indexdoc/indexdoc-vector.git)   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## ✨ Core Features
-- **Memory-Mapped I/O**: Built on `numpy.memmap`, supports TB-scale vector storage with extremely low memory footprint
-- **Thread Safety**: Built-in fair reentrant read-write lock (RWLock) for high-concurrency read/write operations
-- **Efficient Search**: Full-library cosine similarity search and ID-range-restricted search, optimized for batch processing
-- **Vector Management**: Full-featured add, delete, compact, and statistics functions
-- **Zero-Dependency Core**: Only depends on NumPy, no complex database deployment required
+- **Memory-Mapped I/O**: Implemented based on `numpy.memmap`, supporting TB-level vector storage with extremely low memory footprint
+- **Thread Safety**: Built-in fair and reentrant Read-Write Lock (RWLock) for high-concurrency read/write operations
+- **Efficient Search**: Supports full-database cosine similarity search and search within specified ID ranges, optimized with batch processing
+- **Vector Management**: Complete functionality for adding, deleting, compressing, and statistics collection of vectors
+- **Zero Core Dependencies**: Only depends on NumPy, no complex database deployment required
+
+## 🌏 Library Usage
+```bash
+# Library installation
+pip install -U indexdoc-vector # Install the latest version of the library
+```
+- The minimum required Python version for using this library is Python 3.10
+- Package directory structure
+```bash
+indexdoc-vector/          # Project root directory
+├── indexdoc_vector/      # Core package directory
+│   ├── __init__.py       # Core code
+│   └── mem_map_vector.py
+```
 
 ## 🚀 Quick Start
 
 ### Basic Usage Example
 ```python
+from indexdoc_vector.mem_map_vector import MemMapVector
 # Initialize vector storage (default dimension: 512)
 vec_db = MemMapVector("vectors.vec", dimension=512)
 
