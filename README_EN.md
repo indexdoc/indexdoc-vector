@@ -45,6 +45,7 @@ indexdoc-vector/          # Project root directory
 
 ### Basic Usage Example
 ```python
+import numpy as np
 from indexdoc_vector.mem_map_vector import MemMapVector
 # Initialize vector storage (default dimension: 512)
 vec_db = MemMapVector("vectors.vec", dimension=512)
