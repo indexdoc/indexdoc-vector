@@ -45,6 +45,7 @@ indexdoc-vector/          # 项目根目录
 
 ### 基础使用示例
 ```python
+import numpy as np
 from indexdoc_vector.mem_map_vector import MemMapVector
 
 # 初始化向量存储（维度默认512）
