@@ -16,7 +16,7 @@
 
 
 ---
-# MemMapVector: 轻量级内存映射向量存储库
+# indexdoc-vector: 轻量级内存映射向量存储库
 轻量级、线程安全的内存映射向量存储库，支持高效的余弦相似度搜索和向量管理。该工具库现已发布至 PyPI（Python Package Index），可通过 pip 包管理工具快速安装并投入使用。
 
 [![Python Version](https://img.shields.io/badge/python-3.10+-green.svg)](https://www.python.org/)  [![GitHub Stars](https://img.shields.io/github/stars/indexdoc/indexdoc-vector?style=social)](https://github.com/indexdoc/indexdoc-vector.git)   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
