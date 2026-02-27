@@ -15,7 +15,7 @@
   </div>
 
 ---
-# MemMapVector: Lightweight Memory-Mapped Vector Storage Library
+# indexdoc-vector: Lightweight Memory-Mapped Vector Storage Library
 A lightweight, thread-safe memory-mapped vector storage library that supports efficient cosine similarity search and vector management. This library is now published on the Python Package Index (PyPI) and can be quickly installed and used via the pip package manager.
 
 [![Python Version](https://img.shields.io/badge/python-3.10+-green.svg)](https://www.python.org/)  [![GitHub Stars](https://img.shields.io/github/stars/indexdoc/indexdoc-vector?style=social)](https://github.com/indexdoc/indexdoc-vector.git)   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
